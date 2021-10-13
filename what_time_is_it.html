@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+    <head>
+        <!-- page title shows on the tab -->
+        <title>Interval</title> 
+    </head>
+    <body>
+        <!-- message to the user dipayed on the page -->
+        <h1> Hey Clara, What time is it?</h1>
+        <p id="time"></p>
+        <!--use to show currect time on our web page-->
+
+        <!-- scrip start -->
+        <script>
+           let timeElement = document.querySelector('#time')
+
+           setInterval(function() {
+               let date= Date()  //date is a built in function we can use
+               timeElement.innerHTML = date
+           }, 1000); //1000 thousandth of a second so 1 second
+        </script>
+        <!-- end of script and html framwork ending bleow -->
+    </body>  
+ 
+</html>
