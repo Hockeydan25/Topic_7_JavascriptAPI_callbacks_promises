@@ -11,8 +11,9 @@
 
         <!-- scrip start -->
         <script>
+            //JS does one thing at a time.
            let timeElement = document.querySelector('#time')
-
+            //calls the function repeatedly not like a foreach where is repaets throught the elements.
            setInterval(function() {
                let date= Date()  //date is a built in function we can use
                timeElement.innerHTML = date
