@@ -14,10 +14,19 @@
             //JS does one thing at a time.
            let timeElement = document.querySelector('#time')
             //calls the function repeatedly not like a foreach where is repaets throught the elements.
-           setInterval(function() {
+        //    setInterval(function() {
+        //        let date= Date()  //date is a built in function we can use
+        //        timeElement.innerHTML = date
+        //    }, 1000); //1000 thousandth of a second so 1 second
+           
+           //use arrow function method, eleminats the word function places arrow ahead of function ().
+           
+           setInterval( () => {
                let date= Date()  //date is a built in function we can use
                timeElement.innerHTML = date
            }, 1000); //1000 thousandth of a second so 1 second
+        
+        
         </script>
         <!-- end of script and html framwork ending bleow -->
     </body>  
