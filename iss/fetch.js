@@ -4,6 +4,7 @@ let issLat = document.querySelector('#iss-lat')
 let issTime = document.querySelector('#time')
 let issLong = document.querySelector('#iss-long')
 let update =10000 // create variable for easier calls, faster to change and keeps it obvious.
+let maxFailedAttempts = 3
 let issMarker //we left this undefinded I don't have errors and I am not sure I can explain why is empty.
 let myIcon = L.icon({
     iconUrl: 'sat.png', //file we are using is getting to get it from.
@@ -20,9 +21,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 //add API 10 sec refresh.turn our fetch into a function. setInterval waits 10 seconds, repeated.
 //json will extract the json information
-iss() //
-setInterval(iss, update) //variable in place of 10000 
-function iss(){
+iss(maxFailedAttempts) //
+//setInterval(iss, update) //variable in place of 10000 
+function iss(attempts){
+
+    if (attempts <= 0){
+        alert('ACHTUNG! Attempts to contact mission cantrol have failed after severl attempts')
+        return
+    }
+
     fetch(url).then( (res) => {  //function call return , then call will once it's loaded. promise
         return res.json() //second promise return resolved or failed 
     }).then( (issData) => {
@@ -44,6 +51,9 @@ function iss(){
         let now = Date() //using date function to get date and time.
         issTime.innerHTML = `This data was fetched at : ${now}.`//note on page about string leteral
     }).catch( (err) => {
-        console.log('ERROR!', err) //generic error handler. catched many eeerors, url error 
+        attempts = attempts -1 //this is plan to read. subs 1 from numbet of attempts with each failed attempt.
+        console.log('ERROR!', err) //generic error handler. catched many eeerors, url error.
+    }).finally( () => {
+        setTimeout(iss, update, attempts)
     })
 }
